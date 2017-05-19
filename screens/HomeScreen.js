@@ -13,7 +13,7 @@ import {
 import { MonoText } from '../components/StyledText';
 import firebase from 'firebase';
 import { CustomHeader } from '../components/common';
-
+import LoginForm from '../components/LoginForm'
 
 export default class HomeScreen extends React.Component {
   static route = {
@@ -34,8 +34,6 @@ export default class HomeScreen extends React.Component {
         messagingSenderId: "867584512761"
           });
 
-
-
   }
 
   render() {
@@ -43,7 +41,7 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <CustomHeader headerText="Authentication"/>
         <ScrollView>
-          <Text>An Expo App</Text>
+        <LoginForm/>
         </ScrollView>
       </View>
     );
