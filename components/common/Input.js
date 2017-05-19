@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 
 // pull in from the parent the functions needed
-const Input = ({ label, value, onChangeText, placeholder }) => {
+const Input = ({ label, value, onChangeText, placeholder, secureTextEntry }) => {
  // pull styles out of input object
  const { inputStyle, labelStyle, containerStyle } = styles;
 	
@@ -14,7 +14,8 @@ const Input = ({ label, value, onChangeText, placeholder }) => {
 			autoCorrect={false}
 			value = {value}
 			onChangeText = {onChangeText}
-			style={inputStyle}>
+			style={inputStyle}
+			secureTextEntry = {secureTextEntry}>
 		</TextInput>
 		</View>
 		);
