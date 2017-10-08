@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { Button, Card, CardSection, Input } from './common';
+import { Button, Card, CardSection, Input, Spinner } from './common';
 import firebase from 'firebase';
 
 class LoginForm extends Component {
@@ -8,12 +8,13 @@ class LoginForm extends Component {
     email: '',
     password: '',
     error: '',
+    loading: false,
   };
 
   onButtonPress() {
     const { email, password } = this.state;
 
-    this.setState({ error: '' });
+    this.setState({ error: '', loading: false });
     // try to sign in the user
     firebase
       .auth()
@@ -25,9 +26,18 @@ class LoginForm extends Component {
           .createUserWithEmailAndPassword(email, password)
           .catch(() => {
             // if it fails to create a new account
-            this.setState({ error: 'Authentication Failed' });
+            this.setState({
+              error: 'We were unable to log you in. Please try again.',
+            });
           });
       });
+  }
+
+  renderButton() {
+    if (this.state.loading) {
+      return <Text>Loading...</Text>; // return <Spinner size="small" />;
+    }
+    return <Button onPress={this.onButtonPress.bind(this)}>Log in</Button>;
   }
 
   render() {
@@ -41,24 +51,22 @@ class LoginForm extends Component {
             placeholder="user@gmail.com"
           />
         </CardSection>
-        <Input
-          placeholder="password"
-          label="Password"
-          value={this.state.password}
-          onChangeText={password => this.setState({ password })}
-          secureTextEntry
-        />
-
-        <CardSection />
-        <Text style={styles.errorTextStyle}>
-          {/* show an error if the reg fails */}
-          {this.state.error}
-        </Text>
         <CardSection>
-          <Button onPress={this.onButtonPress.bind(this)}>
-            {' '}Login
-          </Button>
+          <Input
+            placeholder="password"
+            label="Password"
+            value={this.state.password}
+            onChangeText={password => this.setState({ password })}
+            secureTextEntry
+          />
         </CardSection>
+        <CardSection>
+          <Text style={styles.errorTextStyle}>
+            {/* show an error if the reg fails */}
+            {this.state.error}
+          </Text>
+        </CardSection>
+        <CardSection>{this.renderButton()}</CardSection>
       </Card>
     );
   }
@@ -66,8 +74,8 @@ class LoginForm extends Component {
 
 const styles = {
   errorTextStyle: {
-    color: 'red',
-    fontSize: 24,
+    color: 'black',
+    fontSize: 18,
     textAlign: 'center',
   },
 };

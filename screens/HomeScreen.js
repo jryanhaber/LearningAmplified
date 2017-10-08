@@ -3,7 +3,6 @@ import {
   Image,
   Linking,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,7 +12,7 @@ import {
 import { MonoText } from '../components/StyledText';
 import firebase from 'firebase';
 import { CustomHeader } from '../components/common';
-import LoginForm from '../components/LoginForm'
+import LoginForm from '../components/LoginForm';
 
 export default class HomeScreen extends React.Component {
   static route = {
@@ -22,36 +21,25 @@ export default class HomeScreen extends React.Component {
     },
   };
 
-  componentWillMount(){
-
+  componentWillMount() {
     firebase.initializeApp({
-      
-        apiKey: "AIzaSyDFEHH1Vm1LHRhCdR_4qfqFtTkEkgJNnN8",
-        authDomain: "authentication-4079b.firebaseapp.com",
-        databaseURL: "https://authentication-4079b.firebaseio.com",
-        projectId: "authentication-4079b",
-        storageBucket: "authentication-4079b.appspot.com",
-        messagingSenderId: "867584512761"
-          });
-
+      apiKey: 'AIzaSyDFEHH1Vm1LHRhCdR_4qfqFtTkEkgJNnN8',
+      authDomain: 'authentication-4079b.firebaseapp.com',
+      databaseURL: 'https://authentication-4079b.firebaseio.com',
+      projectId: 'authentication-4079b',
+      storageBucket: 'authentication-4079b.appspot.com',
+      messagingSenderId: '867584512761',
+    });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <CustomHeader headerText="Authentication"/>
-        <ScrollView>
-        <LoginForm/>
-        </ScrollView>
+        <CustomHeader headerText="Authentication" />
+        <LoginForm />
       </View>
     );
-  } 
-
-
-
-
-
-
+  }
 
   _maybeRenderDevelopmentModeWarning() {
     if (__DEV__) {
@@ -90,9 +78,6 @@ export default class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  
-
-
   container: {
     flex: 1,
     backgroundColor: '#fff',
